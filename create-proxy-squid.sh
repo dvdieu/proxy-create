@@ -75,8 +75,10 @@ EOF
 }
 
 gen_data() {
+    user = $(awk -F "/" '{print "$1"}' ${WORKFILEUSER})
+    pass = $(awk -F "/" '{print "$2"}' ${WORKFILEUSER})
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "$(awk -F "/" '{print "$1"}' ${WORKFILEUSER})/$(awk -F "/" '{print "$2"}' ${WORKFILEUSER}) /$IP4/$port/$(gen64 $IP6)"
+        echo "$(user)/$(pass)/$IP4/$port/$(gen64 $IP6)"
     done
 }
 
