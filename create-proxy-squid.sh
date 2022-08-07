@@ -20,7 +20,7 @@ install_squid() {
     yum -y install squid
 
     #install httpd
-    yum install httpd
+    yum install httpd -y
 
     sudo touch /etc/squid/squid_passwd
 
@@ -75,8 +75,8 @@ EOF
 }
 
 gen_data() {
-    user = $(awk -F "/" '{print $1}' ${WORKFILEUSER})
-    pass = $(awk -F "/" '{print $2}' ${WORKFILEUSER})
+    user=$(awk -F ":" '{print $1}' ${WORKFILEUSER})
+    pass=$(awk -F ":" '{print $2}' ${WORKFILEUSER})
     seq $FIRST_PORT $LAST_PORT | while read port; do
         echo "$user/$pass)/$IP4/$port/$(gen64 $IP6)"
     done
