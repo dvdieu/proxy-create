@@ -89,7 +89,6 @@ gen_config_squid() {
         auth_param basic realm proxy
         acl authenticated proxy_auth REQUIRED
         # ...
-        http_access allow localnet
         http_access allow localhost
         http_access allow authenticated
         # And finally deny all other access to this proxy
@@ -98,7 +97,6 @@ gen_config_squid() {
 
         http_access allow localhost manager
         http_access deny manager
-        http_access allow localhost
 
         $(awk -F "/" '{print "http_port " $4 ""}' ${WORKDATA}) 
         
@@ -110,10 +108,10 @@ gen_config_squid() {
 
         dns_v4_first off
 
-        $(awk -F "/" '{print "acl user " $4 " myportname " $4 ""}' ${WORKDATA}) 
+        $(awk -F "/" '{print "acl user" $4 " myportname " $4 ""}' ${WORKDATA}) 
 
 
-        $(awk -F "/" '{print "tcp_outgoing_address " $5 ""}' ${WORKDATA})
+        $(awk -F "/" '{print "tcp_outgoing_address " $5 " user" $4 ""}' ${WORKDATA})
 
 
         forwarded_for delete
