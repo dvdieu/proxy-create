@@ -99,8 +99,9 @@ gen_config_squid() {
         http_access allow localhost manager
         http_access deny manager
         http_access allow localhost
-        http_port 3128
-        http_port 3129
+
+        $(awk -F "/" '{print "http_port " $4 ""}' ${WORKDATA}) 
+        
         coredump_dir /var/spool/squid
 
         #http_access allow all
@@ -148,7 +149,7 @@ EOF
 }
 
 FIRST_PORT=10000
-LAST_PORT=10200
+LAST_PORT=10150
 
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
