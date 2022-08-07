@@ -75,10 +75,10 @@ EOF
 }
 
 gen_data() {
-    user = $(awk -F "/" '{print "$1"}' ${WORKFILEUSER})
-    pass = $(awk -F "/" '{print "$2"}' ${WORKFILEUSER})
+    user = $(awk -F "/" '{print $1}' ${WORKFILEUSER})
+    pass = $(awk -F "/" '{print $2}' ${WORKFILEUSER})
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "$(user)/$(pass)/$IP4/$port/$(gen64 $IP6)"
+        echo "$user/$pass)/$IP4/$port/$(gen64 $IP6)"
     done
 }
 
@@ -164,8 +164,6 @@ install_squid
 
 set_user_pass_to_file >$WORKDIR/file_user_pass.txt
 
-#create file
-mkdir $WORKDIR && cd $_
 
 
 #gen port
@@ -182,8 +180,10 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
-
+echo "gen file data"
 gen_data >$WORKDIR/data.txt
+
+echo "gen file boot_ifconfig"
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-${main_interface}
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
@@ -196,4 +196,5 @@ EOF
 
 bash /etc/rc.local
 
+echo "gen file proxy"
 gen_file_proxy >$WORKDIR/proxy.txt
