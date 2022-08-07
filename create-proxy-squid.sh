@@ -45,7 +45,7 @@ install_squid() {
 
 
 gen_user_pass(){
-        printf "phucmn:$(openssl passwd -crypt 'Pz$lPk76')\n" | sudo tee -a /etc/squid/htpasswd
+        printf "phucmn:$(openssl passwd -crypt 'PzlPk76')\n" | sudo tee -a /etc/squid/htpasswd
 }
 
 set_user_pass_to_file(){
@@ -78,7 +78,7 @@ gen_data() {
     user=$(awk -F ":" '{print $1}' ${WORKFILEUSER})
     pass=$(awk -F ":" '{print $2}' ${WORKFILEUSER})
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "$user/Pz$lPk76/$IP4/$port/$(gen64 $IP6)"
+        echo "phucmn/PzlPk76/$IP4/$port/$(gen64 $IP6)"
     done
 }
 
