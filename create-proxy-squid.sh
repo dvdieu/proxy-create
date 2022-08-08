@@ -36,7 +36,8 @@ install_squid() {
     echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
     echo "net.ipv6.ip_nonlocal_bind = 1" >> /etc/sysctl.conf
     sysctl -p
-
+    systemctl stop firewalld
+    systemctl disable firewalld
     cd $WORKDIR
 }
 
@@ -179,6 +180,7 @@ echo "gen file data"
 gen_data >$WORKDIR/data.txt
 
 echo "gen file boot_ifconfig"
+gen_iptables >$WORKDIR/boot_iptables.sh
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-${main_interface}
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
@@ -186,6 +188,7 @@ chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 echo "vi rc.local"
 cat >>/etc/rc.local <<EOF
 systemctl start NetworkManager.service
+bash ${WORKDIR}/boot_iptables.sh
 bash ${WORKDIR}/boot_ifconfig.sh
 EOF
 
