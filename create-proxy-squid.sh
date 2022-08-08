@@ -36,8 +36,6 @@ install_squid() {
     echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
     echo "net.ipv6.ip_nonlocal_bind = 1" >> /etc/sysctl.conf
     sysctl -p
-    systemctl stop firewalld
-    systemctl disable firewalld
     cd $WORKDIR
 }
 
@@ -145,7 +143,7 @@ EOF
 }
 
 FIRST_PORT=20000
-LAST_PORT=20150
+LAST_PORT=20100
 
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
