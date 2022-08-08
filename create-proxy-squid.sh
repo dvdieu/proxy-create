@@ -19,9 +19,6 @@ install_squid() {
     echo "installing squid"
     yum -y install squid
 
-    #install httpd
-    yum install httpd -y
-
     sudo touch /etc/squid/squid_passwd
 
     # create pass proxy
