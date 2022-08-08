@@ -89,7 +89,13 @@ gen_config_squid() {
         http_access allow authenticated
         # And finally deny all other access to this proxy
         http_access deny all
+        # No caching
+        cache deny all
 
+        # No logging
+        access_log none
+        cache_store_log none
+        cache_log /dev/null
 
         http_access allow localhost manager
         http_access deny manager
@@ -143,7 +149,7 @@ EOF
 }
 
 FIRST_PORT=20000
-LAST_PORT=20100
+LAST_PORT=20150
 
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
