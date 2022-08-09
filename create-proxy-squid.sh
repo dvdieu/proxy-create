@@ -36,6 +36,8 @@ install_squid() {
     echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
     echo "net.ipv6.ip_nonlocal_bind = 1" >> /etc/sysctl.conf
     sysctl -p
+    systemctl stop firewalld
+    systemctl disable firewalld
     cd $WORKDIR
 }
 
@@ -149,7 +151,7 @@ EOF
 }
 
 FIRST_PORT=20000
-LAST_PORT=20110
+LAST_PORT=20150
 
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
@@ -167,13 +169,13 @@ set_user_pass_to_file >$WORKDIR/file_user_pass.txt
 
 
 #gen port
-echo "open public port...."
-gen_firewalld >$WORKDIR/firewalld.sh
+#echo "open public port...."
+#gen_firewalld >$WORKDIR/firewalld.sh
 
 #public port by firewalld
-bash $WORKDATAFIREWALLD
-firewall-cmd --reload
-echo "end add port"
+#bash $WORKDATAFIREWALLD
+#firewall-cmd --reload
+#echo "end add port"
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
