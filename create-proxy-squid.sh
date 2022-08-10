@@ -83,14 +83,14 @@ gen_data() {
 gen_config_squid() {
     cat <<EOF
         # ...
-        auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/htpasswd
-        auth_param basic realm proxy
-        acl authenticated proxy_auth REQUIRED
+        #auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/htpasswd
+       # auth_param basic realm proxy
+       # acl authenticated proxy_auth REQUIRED
         # ...
-        http_access allow localhost
-        http_access allow authenticated
+        #http_access allow localhost
+        #http_access allow authenticated
         # And finally deny all other access to this proxy
-        http_access deny all
+        #http_access deny all
         # No caching
         cache deny all
 
@@ -106,7 +106,7 @@ gen_config_squid() {
         
         coredump_dir /var/spool/squid
 
-        #http_access allow all
+        http_access allow all
         acl to_ipv4 dst ipv4
         http_access deny to_ipv4
 
@@ -146,7 +146,7 @@ EOF
 
 gen_file_proxy(){
     cat <<EOF
-$(awk -F "/" '{print $3 ":" $4 ":" $1 ":" $2 }' ${WORKDATA})
+$(awk -F "/" '{print $3 ":" $4 }' ${WORKDATA})
 EOF
 }
 
@@ -164,7 +164,7 @@ mkdir $WORKDIR && cd $_
 
 install_squid
 
-set_user_pass_to_file >$WORKDIR/file_user_pass.txt
+#set_user_pass_to_file >$WORKDIR/file_user_pass.txt
 
 
 
