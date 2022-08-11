@@ -73,8 +73,8 @@ EOF
 }
 
 gen_data() {
-    user=$(awk -F ":" '{print $1}' ${WORKFILEUSER})
-    pass=$(awk -F ":" '{print $2}' ${WORKFILEUSER})
+    #user=$(awk -F ":" '{print $1}' ${WORKFILEUSER})
+    #pass=$(awk -F ":" '{print $2}' ${WORKFILEUSER})
     seq $FIRST_PORT $LAST_PORT | while read port; do
         echo "phucmn/PzlPk76/$IP4/$port/$(gen64 $IP6)"
     done
@@ -151,7 +151,7 @@ EOF
 }
 
 FIRST_PORT=20000
-LAST_PORT=20120
+LAST_PORT=20150
 
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
