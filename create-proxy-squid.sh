@@ -151,7 +151,7 @@ EOF
 }
 
 FIRST_PORT=20000
-LAST_PORT=20150
+LAST_PORT=20100
 
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
