@@ -27,7 +27,7 @@ install_3proxy() {
     cp /3proxy/3proxy-0.9.3/scripts/3proxy.service2 /usr/lib/systemd/system/3proxy.service
     systemctl link /usr/lib/systemd/system/3proxy.service
     systemctl daemon-reload
-#    systemctl enable 3proxy
+   systemctl enable 3proxy
     echo "* hard nofile 999999" >>  /etc/security/limits.conf
     echo "* soft nofile 999999" >>  /etc/security/limits.conf
     echo "net.ipv6.conf.$main_interface.proxy_ndp=1" >> /etc/sysctl.conf
@@ -62,7 +62,7 @@ users $(awk -F "/" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
 
 $(awk -F "/" '{print "auth strong\n" \
 "allow " $1 "\n" \
-"socks -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
+"socks -64 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
 }
