@@ -11,7 +11,7 @@ bash <(curl -s "https://raw.githubusercontent.com/mnphuc/proxy-create/main/creat
 
 no pass
 
-bash <(curl -s "https://raw.githubusercontent.com/mnphuc/proxy-create/main/create-proxy-phuc.sh")
+bash <(curl -s "https://raw.githubusercontent.com/mnphuc/proxy-create/main/proxy-no-pass.sh")
 
 proxy vip pro
 
