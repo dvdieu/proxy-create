@@ -150,8 +150,8 @@ $(awk -F "/" '{print $3 ":" $4 }' ${WORKDATA})
 EOF
 }
 
-FIRST_PORT=20000
-LAST_PORT=20100
+FIRST_PORT=9000
+LAST_PORT=9110
 
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
