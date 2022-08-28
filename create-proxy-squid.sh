@@ -204,6 +204,8 @@ echo "gen file config"
 gen_config_squid >$WORKDIR/squid.conf
 mv /etc/squid/squid.conf /etc/squid/squid.conf.bk
 cp $WORKDIR/squid.conf /etc/squid/squid.conf
+
+systemctl enable squid
 systemctl restart squid
 
 echo "gen file proxy"
