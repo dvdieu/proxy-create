@@ -36,8 +36,8 @@ install_3proxy() {
     echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
     echo "net.ipv6.ip_nonlocal_bind = 1" >> /etc/sysctl.conf
     sysctl -p
-    systemctl stop firewalld
-    systemctl disable firewalld
+    #systemctl stop firewalld
+    #systemctl disable firewalld
 
     cd $WORKDIR
 }
@@ -116,8 +116,8 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
-FIRST_PORT=8600
-LAST_PORT=8800
+FIRST_PORT=8000
+LAST_PORT=10999
 
 gen_data >$WORKDIR/data.txt
 gen_iptables >$WORKDIR/boot_iptables.sh
